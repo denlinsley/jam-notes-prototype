@@ -2,6 +2,14 @@ import React from 'react';
 import { Form, Button } from 'semantic-ui-react';
 
 const AddNoteForm = (props) => {
+    const songOptions = [];
+    props.songs.map(song => {
+        songOptions.push({
+            text: song.title,
+            value: song.slug
+        });
+    });
+
     return (
         <Form onSubmit={props.onSubmit}>
             <Form.Group widths="equal">
@@ -10,6 +18,12 @@ const AddNoteForm = (props) => {
                     label="Song"
                     placeholder="Enter the name of the song"
                 />
+                {/* <Form.Select
+                    name="song"
+                    label="Song"
+                    placeholder="Select a song"
+                    options={songOptions}
+                /> */}
                 <Form.Input
                     name="showDate"
                     label="Show Date"
@@ -26,10 +40,14 @@ const AddNoteForm = (props) => {
                 label="Note"
                 placeholder="Enter your notes..."
             />
-            <Button type="submit" positive icon="checkmark" content="Submit" />
+            <Button
+                type="submit"
+                positive
+                icon="checkmark"
+                content="Submit"
+            />
         </Form>
     );
 };
-
 
 export default AddNoteForm;
