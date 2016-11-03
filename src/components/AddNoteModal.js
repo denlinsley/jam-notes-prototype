@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Modal, Button } from 'semantic-ui-react';
 
-import { base } from './utils/base';
-import { getSongs } from './utils/phishin';
+import { base } from '../utils/base';
+import { getSongs } from '../utils/phishin';
 import AddNoteForm from './AddNoteForm'
 
 class AddNoteModal extends Component {
