@@ -3,7 +3,7 @@ import { Modal, Button } from 'semantic-ui-react';
 
 import { base } from '../utils/base';
 import { getSongs } from '../utils/phishin';
-import AddNoteForm from './AddNoteForm'
+import AddNoteForm from './AddNoteForm';
 
 class AddNoteModal extends Component {
     constructor(props) {

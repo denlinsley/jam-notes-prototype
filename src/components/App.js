@@ -1,38 +1,42 @@
 import React, { Component } from 'react';
-import { Container, Card } from 'semantic-ui-react';
-
-import NavMenu from './NavMenu';
-import RecentCard from './RecentCard';
-import AddNoteModal from './AddNoteModal';
-
-const sampleNotes = [
-    { song: 'Bathtub Gin', showDate: '08/17/1997', note: 'Contender for the most uplifting jam ever. Just keeps going and going!' },
-    { song: 'Tweezer', showDate: '07/31/2013', note: '30 minutes of the finest jamming in their whole career' },
-    { song: 'AC/DC Bag', showDate: '09/16/1999', note: 'Dark and groovy, exemplifying the best parts of the late 90s' },
-];
-
-const notes = [...sampleNotes, ...sampleNotes, ...sampleNotes];
+import { Link } from 'react-router';
+import { Header, Menu } from 'semantic-ui-react';
 
 class App extends Component {
-    renderAddNoteModal = () => {
-        return <AddNoteModal />;
-    };
-
-    render() {
-        return (
-            <div>
-                <NavMenu />
-                <Container style={{ marginTop: 50 }}>
-                    <AddNoteModal />
-                    <Card.Group itemsPerRow={3}>
-                        {notes.map((note, index) =>
-                            <RecentCard key={index} note={note} />
-                        )}
-                    </Card.Group>
-                </Container>
-            </div>
-        );
+    constructor(props) {
+        super(props);
+        this.state = { activeItem: 'home' };
+        this.handleItemClick = this.handleItemClick.bind(this);
     }
+
+    handleItemClick(e, { name }) {
+        this.setState({ activeItem: name });
+    }
+
+  render() {
+    const { activeItem } = this.state;
+
+    return (
+      <div>
+        <Menu pointing secondary>
+            <Header as="h1">Jam Notes</Header>
+            <Menu.Item>
+                <Link to="/home">Home</Link>
+            </Menu.Item>
+            <Menu.Item>
+                <Link to="/notes">Login</Link>
+            </Menu.Item>
+            <Menu.Item>
+                <Link to="/login">Login</Link>
+            </Menu.Item>
+            <Menu.Menu position='right'>
+                <Menu.Item name='logout' active={activeItem === 'logout'} onClick={this.handleItemClick} />
+            </Menu.Menu>
+        </Menu>
+        {this.props.children}
+      </div>
+    );
+  }
 }
 
 export default App;
