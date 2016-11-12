@@ -1,9 +1,9 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 
 class Notes extends Component {
-    constructor(props) {
-        super(props);
-    }
+    // constructor(props) {
+    //     super(props);
+    // }
 
     render() {
         return (

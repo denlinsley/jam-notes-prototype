@@ -15,9 +15,13 @@ function NotFound(props) {
                 <h3>Sorry, but we couldn't find the page you were looking for.</h3>
                 <p>Whatever you do, take care of your shoes!</p>
                 <Link to="/home">
-                    <Button color="green" size="big" inverted>
-                        <Icon name="hand peace" /> OK
-                    </Button>
+                    <Button
+                      color="green"
+                      content="OK"
+                      icon="hand peace"
+                      size="big"
+                      inverted
+                    />
                 </Link>
             </Container>
 
