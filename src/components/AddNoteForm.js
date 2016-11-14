@@ -11,8 +11,6 @@ const AddNoteForm = (props) => {
         value: song.slug
     }));
 
-    const DatetimePicker = <Datetime timeFormat={false} viewMode="years" closeOnSelect />;
-
     return (
         <Form onSubmit={props.onSubmit}>
             <Form.Group widths="equal">
@@ -32,9 +30,18 @@ const AddNoteForm = (props) => {
                     label="Show Date"
                     placeholder="Enter the date of the show"
                 /> */}
-                <Form.Input
-                  as={() => DatetimePicker}
-                />
+                <div className="field">
+                    <label htmlFor="showDate">Show Date</label>
+                    <div id="ui input">
+                        <Datetime
+                          inputProps={{name: 'showDate'}}
+                          timeFormat={false}
+                          viewMode="years"
+                          closeOnSelect
+                        />
+                    </div>
+                </div>
+
             </Form.Group>
             <Form.Input
                 name="link"
