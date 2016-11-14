@@ -4,7 +4,8 @@ import { Router, Route, browserHistory } from 'react-router';
 
 import App from './components/App';
 import Home from './components/Home';
-import Notes from './components/Notes';
+import NotesList from './components/NotesList';
+import NotesDetail from './components/NotesDetail';
 import Login from './components/Login';
 import NotFound from './components/NotFound';
 
@@ -14,7 +15,8 @@ const Main = () => (
     <Router history={browserHistory}>
         <Route path="/" component={App}>
             <Route path="/home" component={Home} />
-            <Route path="/notes" component={Notes} />
+            <Route path="/notes" component={NotesList} />
+            <Route path="/notes/:id" component={NotesDetail} />
             <Route path="/login" component={Login} />
             <Route path="*" component={NotFound} />
         </Route>

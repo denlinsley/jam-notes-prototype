@@ -6,3 +6,5 @@ export const base = Rebase.createClass({
     databaseURL: "https://jam-notes-prototype.firebaseio.com",
     storageBucket: "jam-notes-prototype.appspot.com",
 });
+
+export const auth = base.auth();

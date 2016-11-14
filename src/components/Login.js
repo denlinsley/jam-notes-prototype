@@ -8,7 +8,7 @@ import {
     Message
 } from 'semantic-ui-react';
 
-import { base } from '../utils/base';
+import { auth } from '../utils/base';
 import SingleInput from './FormFields/SingleInput';
 
 class Login extends Component {
@@ -26,9 +26,8 @@ class Login extends Component {
     }
 
     componentWillMount() {
-        console.debug('currentUser', base.auth().currentUser);
-        if (base.auth().currentUser) {
-            this.props.router.push('/home');
+        if (auth.currentUser) {
+            // this.props.router.push('/home');
         }
     }
 
@@ -49,32 +48,33 @@ class Login extends Component {
     handleSubmit(e, serializedForm) {
         e.preventDefault();
         const { email, password } = serializedForm;
-        base.auth().signInWithEmailAndPassword(email, password)
+        auth.signInWithEmailAndPassword(email, password)
             .then(() => this.props.router.push('/home'))
             .catch(err => this.setState({ error: err.message }));
     }
 
     render() {
+        const { email, password, error } =this.state;
         return (
             <Container text>
                 <Header as="h2" content="Log in" />
-                <Form onSubmit={this.handleSubmit} error={this.state.error !== ''}>
+                <Form onSubmit={this.handleSubmit} error={error !== ''}>
                     {/* FYI `refs` don't work with functional components */}
                     <SingleInput
                       inputType="text"
                       label="Email"
                       name="email"
                       controlFunc={this.handleEmailChange}
-                      value={this.state.email}
-                      hasError={this.state.error.includes('email')}
+                      value={email}
+                      hasError={error.includes('email')}
                     />
                     <SingleInput
                       inputType="password"
                       label="Password"
                       name="password"
                       controlFunc={this.handlePasswordChange}
-                      value={this.state.password}
-                      hasError={this.state.error.includes('password')}
+                      value={password}
+                      hasError={error.includes('password')}
                     />
                     <Button
                       type="submit"
@@ -85,7 +85,7 @@ class Login extends Component {
                     <Message
                       error
                       header="Failed to log in"
-                      list={[this.state.error]}
+                      list={[error]}
                     />
                 </Form>
             </Container>

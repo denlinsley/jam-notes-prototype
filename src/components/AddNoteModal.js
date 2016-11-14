@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router';
 import { Modal, Button } from 'semantic-ui-react';
 
 import { base } from '../utils/base';
@@ -32,11 +33,17 @@ class AddNoteModal extends Component {
         e.preventDefault();
         console.log(serializedForm);
 
+        const noteData = {
+            ...serializedForm,
+            userUid: base.auth().currentUser.uid
+        };
         base.push('notes', {
-            data: serializedForm
-        }).then(newLocation => {
+            data: noteData
+        }).then((newLocation) => {
             console.log('success', newLocation);
-        }).catch(err => {
+            const noteUid = newLocation.path.o[1];
+            this.props.router.push(`/notes/${noteUid}`);
+        }).catch((err) => {
             console.log('error', err);
         });
     }
@@ -51,8 +58,8 @@ class AddNoteModal extends Component {
                 </Modal.Header>
                 <Modal.Content>
                     <AddNoteForm
-                        songs={this.state.songs}
-                        onSubmit={this.handleSubmit}
+                      songs={this.state.songs}
+                      onSubmit={this.handleSubmit}
                     />
                 </Modal.Content>
                 <Modal.Actions>
@@ -64,4 +71,4 @@ class AddNoteModal extends Component {
     }
 }
 
-export default AddNoteModal;
+export default withRouter(AddNoteModal);

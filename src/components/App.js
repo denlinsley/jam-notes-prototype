@@ -1,15 +1,23 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router';
-import { Header, Menu } from 'semantic-ui-react';
+import { Container, Header, Menu } from 'semantic-ui-react';
 
-import { base } from '../utils/base';
+import { base, auth } from '../utils/base';
 
 class App extends Component {
     constructor(props) {
         super(props);
-        this.state = { activeItem: 'home' };
+        this.state = {
+            activeItem: 'home',
+            user: null
+        };
         this.handleItemClick = this.handleItemClick.bind(this);
         this.handleLogout = this.handleLogout.bind(this);
+    }
+
+    componentWillMount() {
+        console.debug('user', base.auth().currentUser);
+        this.setState({ user: base.auth().currentUser })
     }
 
     handleItemClick(e, { name }) {
@@ -17,8 +25,8 @@ class App extends Component {
     }
 
     handleLogout() {
-        if (base.auth().currentUser) {
-            base.auth().signOut()
+        if (auth.currentUser) {
+            auth.signOut()
                 .then(() => this.props.router.push('/login'))
                 .catch(err => alert(err.message));
         } else {
@@ -37,14 +45,16 @@ class App extends Component {
                 <Menu.Item>
                     <Link to="/notes">Notes</Link>
                 </Menu.Item>
-                <Menu.Item>
-                    <Link to="/login">Login</Link>
-                </Menu.Item>
-                <Menu.Menu position='right'>
-                    <Menu.Item name='log out' icon="sign out" onClick={this.handleLogout} />
+                <Menu.Menu position="right">
+                    {this.state.user
+                        ? <Menu.Item name="log out" icon="sign out" onClick={this.handleLogout} />
+                        : <Link to="/login">Log In</Link>
+                    }
                 </Menu.Menu>
             </Menu>
-        {this.props.children}
+            <Container>
+                {this.props.children}
+            </Container>
         </div>
     );
   }

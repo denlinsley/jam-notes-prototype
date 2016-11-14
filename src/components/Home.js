@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Card } from 'semantic-ui-react';
+import { Card } from 'semantic-ui-react';
 
 import RecentCard from './RecentCard';
 import AddNoteModal from './AddNoteModal';
@@ -13,21 +13,15 @@ const sampleNotes = [
 const notes = [...sampleNotes, ...sampleNotes, ...sampleNotes];
 
 class Home extends Component {
-    renderAddNoteModal = () => {
-        return <AddNoteModal />;
-    };
-
     render() {
         return (
             <div>
-                <Container style={{ marginTop: 50 }}>
-                    <AddNoteModal />
-                    <Card.Group itemsPerRow={3}>
-                        {notes.map((note, index) =>
-                            <RecentCard key={index} note={note} />
-                        )}
-                    </Card.Group>
-                </Container>
+                <AddNoteModal />
+                <Card.Group itemsPerRow={3}>
+                    {notes.map((note, index) =>
+                        <RecentCard key={index} note={note} />
+                    )}
+                </Card.Group>
             </div>
         );
     }
