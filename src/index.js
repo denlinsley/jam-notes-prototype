@@ -10,6 +10,8 @@ import Login from './components/Login';
 import NotFound from './components/NotFound';
 
 import '../node_modules/semantic-ui-css/semantic.css';
+import '../node_modules/react-datetime/css/react-datetime.css';
+
 
 const Main = () => (
     <Router history={browserHistory}>

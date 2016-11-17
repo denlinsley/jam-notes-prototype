@@ -7,6 +7,8 @@
   },
   "dependencies": {
     "axios": "^0.15.2",
+    "chance": "^1.0.4",
+    "lodash": "^4.17.1",
     "moment": "^2.16.0",
     "re-base": "^2.3.0",
     "react": "^15.3.2",

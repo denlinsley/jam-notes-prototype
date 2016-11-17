@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router';
 import { Container, Header, Menu } from 'semantic-ui-react';
 
-import { base, auth } from '../utils/base';
+import { auth } from '../utils/base';
 
 class App extends Component {
     constructor(props) {
@@ -16,8 +16,7 @@ class App extends Component {
     }
 
     componentWillMount() {
-        console.debug('user', base.auth().currentUser);
-        this.setState({ user: base.auth().currentUser })
+        this.setState({ user: auth.currentUser })
     }
 
     handleItemClick(e, { name }) {
